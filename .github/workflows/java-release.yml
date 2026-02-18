@@ -47,12 +47,12 @@ jobs:
         run: |
           echo "Releasing Java applications..."
           
-          # sleep for 2m
-          echo "Sleeping for 2 minutes to simulate work."
-          sleep 120
+          # sleep for 1m
+          echo "Sleeping for 1 minutes to simulate work."
+          sleep 60
           
           # increment the version number in the version.properties file
-          VERSION_FILE="java/applications/version.properties"
+          VERSION_FILE="$(git rev-parse --show-toplevel)/java/applications/version.properties"
           if [ -f "$VERSION_FILE" ]; then
             CURRENT_VERSION=$(cat $VERSION_FILE)
             echo "Current version: $CURRENT_VERSION"
