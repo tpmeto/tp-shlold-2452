@@ -5,8 +5,6 @@ on:
     types: [opened, synchronize, labeled, unlabeled]
 
 permissions:
-  contents: write
-  actions: read
   issues: write
   pull-requests: write
 
