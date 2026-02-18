@@ -52,7 +52,7 @@ jobs:
           sleep 60
           
           # increment the version number in the version.properties file
-          VERSION_FILE="$(git rev-parse --show-toplevel)/python/applications/version.properties"
+          VERSION_FILE="python/version.properties"
           if [ -f "$VERSION_FILE" ]; then
             CURRENT_VERSION=$(cat $VERSION_FILE)
             echo "Current version: $CURRENT_VERSION"
