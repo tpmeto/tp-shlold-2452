@@ -44,6 +44,18 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: Lock PRs
+        id: lock_prs
+        if: steps.java_changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+            echo "Locking other PRs..."
+            PRS=$(gh pr list --state open --json number --jq '.[].number')
+            for pr in $PRS; do
+                echo "Locking PR #$pr"
+                gh pr edit $pr --add-label "do-not-merge"
+            done
+
       - name: Release Java applications
         id: java_release
         if: steps.java_changes.outputs.changed == 'true'
@@ -83,4 +95,15 @@ jobs:
           git push origin HEAD:main
           
           echo "Java Release complete..."
-          
+
+      - name: Unlock PRs
+        id: unlock_prs
+        if: steps.java_changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+          echo "Unlocking other PRs..."
+          PRS=$(gh pr list --state open --json number --jq '.[].number')
+          for pr in $PRS; do
+              echo "Unlocking PR #$pr"
+              gh pr edit $pr --remove-label "do-not-merge"
+          done
