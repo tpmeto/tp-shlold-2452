@@ -34,7 +34,7 @@ jobs:
         id: java_changes
         shell: bash
         run: |
-          git fetch origin master --depth=2
+          git fetch origin main --depth=2
           CHANGED=$(git diff --name-only HEAD^ HEAD -- 'java/applications/**' | grep . || true)
           if [ -z "$CHANGED" ]; then
             echo "No Java files changed. Skipping workflow."

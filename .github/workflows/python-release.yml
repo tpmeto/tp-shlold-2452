@@ -34,7 +34,7 @@ jobs:
         id: python_changes
         shell: bash
         run: |
-          git fetch origin master --depth=2
+          git fetch origin main --depth=2
           CHANGED=$(git diff --name-only HEAD^ HEAD -- 'python/applications/**' | grep . || true)
           if [ -z "$CHANGED" ]; then
             echo "No Python files changed. Skipping workflow."
