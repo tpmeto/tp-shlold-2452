@@ -3,6 +3,9 @@ name: label-gate
 on:
   pull_request:
     types: [opened, synchronize, labeled, unlabeled]
+  push:
+    branches:
+      - main
 
 permissions:
   issues: write
