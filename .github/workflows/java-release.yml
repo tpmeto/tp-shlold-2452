@@ -51,6 +51,9 @@ jobs:
           echo "Sleeping for 1 minutes to simulate work."
           sleep 60
           
+          # ensure we are using the latest code from main
+          git pull origin main
+          
           # increment the version number in the version.properties file
           VERSION_FILE="java/version.properties"
           if [ -f "$VERSION_FILE" ]; then
