@@ -35,9 +35,9 @@ jobs:
         shell: bash
         run: |
           git fetch origin main --depth=2
-          CHANGED=$(git diff --name-only HEAD^ HEAD -- 'java/applications/**' | grep . || true)
+          CHANGED=$(git diff --name-only HEAD^ HEAD -- 'java/**' | grep . || true)
           if [ -z "$CHANGED" ]; then
-            echo "No Python files changed. Skipping workflow."
+            echo "No Java files changed. Skipping workflow."
             echo "changed=false" >> $GITHUB_OUTPUT
             exit 0
           else
