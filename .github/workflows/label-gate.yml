@@ -1,0 +1,20 @@
+name: label-gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, labeled, unlabeled]
+
+jobs:
+  block_if_label_present:
+    name: merge-allowed-check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fail if PR has do-not-merge label
+        if: contains(github.event.pull_request.labels.*.name, 'do-not-merge')
+        run: |
+          echo "The label 'do-not-merge' is present. Blocking merge."
+          exit 1
+
+      - name: Pass otherwise
+        run: echo "Merge allowed."
