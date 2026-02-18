@@ -4,6 +4,12 @@ on:
   pull_request:
     types: [opened, synchronize, labeled, unlabeled]
 
+permissions:
+  contents: write
+  actions: read
+  issues: write
+  pull-requests: write
+
 jobs:
   block_if_label_present:
     name: merge-allowed-check
